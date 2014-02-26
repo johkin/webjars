@@ -10,7 +10,7 @@ import se.inera.certificate.lab.support.ModuleEntryPoint;
 public class Module1EntryPoint implements ModuleEntryPoint {
     @Override
     public String getModuleName() {
-        return "module1";
+        return "webjars-module1";
     }
 
     @Override

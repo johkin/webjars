@@ -5,20 +5,34 @@ define([
 ], function (angular, controllers, modulesMapString) {
     'use strict';
 
-    var modulesMap = JSON.parse(modulesMapString)
+    var portal = angular.module('portal', [
+        'ngRoute', 'portal.controllers'
+    ]);
 
-    var moduleArr = []
+    portal.config(['$routeProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide',
+        function ($routeProvider, $controllerProvider, $compileProvider, $filterProvider, $provide) {
+
+        portal.register =
+        {
+            controller: $controllerProvider.register,
+            directive: $compileProvider.directive,
+            filter: $filterProvider.register,
+            factory: $provide.factory,
+            service: $provide.service,
+            routeProvider: $routeProvider
+        };
+    }]);
+
+    var modulesMap = JSON.parse(modulesMapString)
 
     for (var key in modulesMap) {
         var moduleUrl = "../webjars/" + modulesMap[key]
-        moduleArr.push(moduleUrl)
+        require([moduleUrl], function(initMethod) {
+            initMethod(portal,  '/webjars/' + key)
+            console.log('module ' + key + ' loaded')
+        })
     }
+    console.log("portal loaded")
 
-    require(moduleArr, function () {
-        console.log("loaded")
-    });
-
-    return angular.module('portal', [
-        'ngRoute', 'portal.controllers'
-    ]);
+    return portal;
 });
