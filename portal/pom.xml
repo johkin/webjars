@@ -69,7 +69,6 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.0.1.v20130408</version>
                 <configuration>
                     <webAppConfig>
                         <contextPath>/</contextPath>
@@ -78,10 +77,6 @@
                         <systemProperty>
                             <name>jetty.port</name>
                             <value>9088</value>
-                        </systemProperty>
-                        <systemProperty>
-                            <name>java.awt.headless</name>
-                            <value>true</value>
                         </systemProperty>
                     </systemProperties>
                 </configuration>

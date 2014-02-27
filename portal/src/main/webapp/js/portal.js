@@ -12,24 +12,24 @@ define([
     portal.config(['$routeProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide',
         function ($routeProvider, $controllerProvider, $compileProvider, $filterProvider, $provide) {
 
-        portal.register =
-        {
-            controller: $controllerProvider.register,
-            directive: $compileProvider.directive,
-            filter: $filterProvider.register,
-            factory: $provide.factory,
-            service: $provide.service,
-            routeProvider: $routeProvider
-        };
-    }]);
+            portal.register =
+            {
+                controller: $controllerProvider.register,
+                directive: $compileProvider.directive,
+                filter: $filterProvider.register,
+                factory: $provide.factory,
+                service: $provide.service,
+                routeProvider: $routeProvider
+            };
+        }]);
 
     var modulesMap = JSON.parse(modulesMapString)
 
-    for (var key in modulesMap) {
-        var moduleUrl = "../webjars/" + modulesMap[key]
-        require([moduleUrl], function(initMethod) {
-            initMethod(portal,  '/webjars/' + key)
-            console.log('module ' + key + ' loaded')
+    for (var artifactId in modulesMap) {
+        var moduleUrl = "../webjars/" + artifactId + modulesMap[artifactId]
+        require([moduleUrl], function (initMethod) {
+            initMethod(portal, '/webjars/' + artifactId)
+            console.log('module ' + artifactId + ' loaded')
         })
     }
     console.log("portal loaded")

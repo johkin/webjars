@@ -15,6 +15,6 @@ public class Module1EntryPoint implements ModuleEntryPoint {
 
     @Override
     public String getModuleScriptPath() {
-        return "webjars-module1/js/module";
+        return "/js/module";
     }
 }
